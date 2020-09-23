@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">M-GuiDe</string>
+    <string name="click_me">Click Me</string>
+    <string name="now_showing">Showing</string>
+    <string name="discover">Discover</string>
+    <string name="visited">Visited</string>
+    <string name="imovies">iMovies</string>
+    <string name="action_adventure">Action Adventure</string>
+    <string name="itvshows">iTvShows</string>
+    <string name="track_name">Track Name</string>
+    <string name="genre">genre</string>
+    <string name="_301">(301)</string>
+    <string name="add_to">Add to</string>
+    <string name="imusic">iMusic</string>
+    <string name="alternative">Alternative</string>
+    <string name="see_all">See all</string>
+    <string name="_500">500</string>
+    <string name="cast">Cast</string>
+    <string name="sypnosis">Sypnosis</string>
+    <string name="rating">Rating</string>
+    <string name="about_track">about track</string>
+    <string name="related_tracks">Related Tracks</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="track_you_visited">Visited Movie</string>
+    <string name="this_week">This week</string>
+    <string name="best_selling">In Theater</string>
+    <string name="top_categories">Top Rated</string>
+    <string name="price">Price</string>
+    <string name="category">Category</string>
+    <string name="search">Search</string>
+    <string name="todays_trending">Todays Trending</string>
+    <string name="_20th_may">20th May</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="in_theater">In Theater:</string>
+    <string name="default_dateTime">2020-19-10</string>
+    <string name="clear">Clear</string>
+</resources>

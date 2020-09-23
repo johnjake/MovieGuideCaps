@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_btn_white">
+
+
+        <ImageView
+                android:id="@+id/imgSlider"
+                android:layout_width="155dp"
+                android:layout_height="195dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:scaleType="centerCrop"/>
+
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="35dp"
+                android:layout_marginStart="14dp">
+
+            <TextView
+                    android:id="@+id/txtSliderTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/track_name"
+                    android:textSize="18sp"
+                    android:textColor="#f00000"/>
+            <TextView
+                    android:id="@+id/txtTopOneGenre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/genre"
+                    android:textColor="#9b9b9b"
+                    android:textSize="15sp"/>
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <RatingBar
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:progressTint="#ffba49"
+                        android:id="@+id/sliderRatingBar"
+                        android:layout_marginTop="6dp"
+                        android:stepSize="0.5"
+                        android:rating="5"/>
+                <TextView
+                        android:id="@+id/sliderRating"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="@dimen/pixels_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/_500"
+                        android:textColor="#f00000"
+                        android:textSize="16sp"/>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

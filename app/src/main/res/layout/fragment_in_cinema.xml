@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/darkCyan"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="end"
+                android:layout_marginTop="16dp">
+                <ImageView
+                    android:id="@+id/search_cinema"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_search_black_24dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="15dp">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/todays_trending"
+                        android:textColor="@color/pinkOne"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/txtDateNow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Best Movie"
+                        android:textColor="#9b9b9b"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_marginTop="18dp">
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/cinemaPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_btn_white"/>
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/cinemaTab"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="@dimen/pixels_8"
+                        android:layout_marginEnd="@dimen/pixels_8"
+                        android:background="@drawable/gradient_bg"/>
+
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="18dp" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="@string/best_selling"
+                        android:textColor="@color/pinkOne"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/this_week"
+                        android:textColor="#9b9b9b"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/seeAllShowing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/pixels_16"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/see_all"
+                        android:textColor="#557ac7"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/pixels_8"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="@dimen/pixels_10"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_btn_white"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="2"
+                    android:id="@+id/recycle_cinema_preview"
+                    tools:listitem="@layout/item_now_showing">
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/pixels_8"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/top_categories"
+                        android:textColor="@color/pinkOne"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/seeAllBottom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/pixels_8"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/see_all"
+                        android:textColor="#557ac7"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="@dimen/pixels_20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_btn_white"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    android:orientation="horizontal"
+                    android:id="@+id/recycleViewTopRated"
+                    tools:listitem="@layout/item_top_rated_movies">
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/darkCyan">
+
+    <ImageView
+        android:id="@+id/toolbar_back"
+        android:layout_width="@dimen/pixels_56"
+        android:layout_height="@dimen/pixels_48"
+        android:layout_marginStart="4dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:src="@drawable/ic_arrow_24dp"/>
+
+</LinearLayout>

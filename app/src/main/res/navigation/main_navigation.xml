@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/cinemaFragment">
+
+    <fragment
+        android:id="@+id/cinemaFragment"
+        android:name="ph.movieguide.com.features.cinema.CinemaFragment"
+        tools:layout="@layout/fragment_in_cinema"
+        android:label="CinemaFragment" >
+        <action
+            android:id="@+id/action_cinema_to_details"
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_cinema_to_search"
+                app:destination="@id/searchFragment"
+            app:enterAnim="@anim/anim_fadein"
+            app:exitAnim="@anim/anim_fadeout" />
+        <action
+            android:id="@+id/action_cinema_to_discoverFragment"
+            app:destination="@id/discoverFragment" />
+        <action
+            android:id="@+id/action_cinema_visitedFragment"
+            app:destination="@id/visitedFragment" />
+        <action
+            android:id="@+id/action_to_discover_details"
+            app:destination="@id/discoverDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="ph.movieguide.com.features.details.MovieDetailsFragment"
+        tools:layout="@layout/fragment_details"
+        android:label="DiscoverFragment" >
+      />
+        <argument
+            android:name="movieId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="ph.movieguide.com.features.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/layout_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/discoverFragment"
+        android:name="ph.movieguide.com.features.discover.DiscoverFragment"
+        android:label="fragment_discover"
+        tools:layout="@layout/fragment_discover" >
+    </fragment>
+    <fragment
+        android:id="@+id/visitedFragment"
+        android:name="ph.movieguide.com.features.visited.VisitedFragment"
+        android:label="fragment_visited"
+        tools:layout="@layout/fragment_visited" >
+         />
+    </fragment>
+    <fragment
+        android:id="@+id/discoverDetailsFragment"
+        android:name="ph.movieguide.com.features.discover_details.DiscoverDetailsFragment"
+        android:label="DiscoverDetailsFragment"
+        tools:layout="@layout/fragment_discover_details"
+        >
+        <argument
+            android:name="movieId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+
+
+</navigation>

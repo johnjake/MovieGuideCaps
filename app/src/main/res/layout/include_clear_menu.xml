@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/include_clear_menu_width"
+    android:layout_height="@dimen/include_clear_menu_height"
+    android:fontFamily="@font/inter_bold"
+    android:includeFontPadding="false"
+    android:orientation="vertical"
+    android:text="@string/clear"
+    android:textAllCaps="true"
+    android:textColor="#ff0058"
+    android:textSize="10sp"
+    tools:ignore="SmallSp" />

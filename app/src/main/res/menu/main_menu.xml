@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/destination_movies"
+        android:icon="@drawable/ic_film"
+        android:title="@string/now_showing"/>
+    <item
+        android:id="@+id/destination_discover"
+        android:icon="@drawable/ic_discovery"
+        android:title="@string/discover"/>
+    <item
+        android:id="@+id/destination_visited"
+        android:icon="@drawable/ic_menu_visited"
+        android:title="@string/visited"/>
+</menu>

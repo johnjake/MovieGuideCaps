@@ -1,0 +1,58 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        minSdkVersion 26
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    def archCompVersion = "2.3.0-alpha02"
+
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.10"
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation  'org.jetbrains.kotlin:kotlin-android-extensions-runtime:1.4.0@jar'
+
+    //coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+
+    //room
+    implementation "androidx.room:room-ktx:$archCompVersion"
+    implementation "androidx.room:room-runtime:$archCompVersion"
+    implementation "androidx.room:room-rxjava2:$archCompVersion"
+    kapt "androidx.room:room-compiler:$archCompVersion"
+
+    //paging
+    implementation "androidx.paging:paging-runtime:3.0.0-alpha06"
+    implementation 'androidx.paging:paging-rxjava2:3.0.0-alpha06'
+
+    implementation "org.koin:koin-android:2.0.1"
+    implementation "org.koin:koin-androidx-viewmodel:2.0.1"
+    implementation "org.koin:koin-androidx-scope:2.0.1"
+
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+}

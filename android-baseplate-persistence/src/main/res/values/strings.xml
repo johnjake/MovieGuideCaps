@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="query_select_by_id">select * from movie_screen where idMovie = :movieId</string>
+</resources>

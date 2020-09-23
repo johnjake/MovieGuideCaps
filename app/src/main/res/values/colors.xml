@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@android:color/black</color>
+    <color name="colorPrimaryDark">@android:color/black</color>
+    <color name="colorAccent">#d81b60</color>
+    <color name="colorAccentTransparent">#99ff3d67</color>
+    <color name="disabled_color">#474a4e</color>
+    <color name="normal_text_color">#9f9f9f</color>
+    <color name="pink">#e5004f</color>
+    <color name="pinkOne">#ff0058</color>
+    <color name="pinkTwenty">#33ff0058</color>
+    <color name="grayOne">#898f90</color>
+    <color name="darkGray">#1c1c1c</color>
+    <color name="lighter_dark">#222229</color>
+    <color name="dark_pink">#ff0058</color>
+    <color name="lighter_grey">#b7bebf</color>
+    <color name="darkPink">#7b1b2f</color>
+    <color name="black30">#4D000000</color>
+    <color name="white_alpha_50">#959595</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="text_light_blue">#566f9a</color>
+
+    <color name="bg_color_bottom_nav">#F2222229</color>
+
+    <!-- transparency -->
+    <color name="transparent_100_white">#00FFFFFF</color>
+    <color name="white_alpha_00">#00FFFFFF</color>
+    <color name="white_alpha_10">#1AFFFFFF</color>
+    <color name="white_alpha_30">#4DFFFFFF</color>
+    <color name="white_alpha_60">#99FFFFFF</color>
+    <color name="white_alpha_70">#B3FFFFFF</color>
+
+    <color name="black_alpha_00">#00000000</color>
+    <color name="black_alpha_10">#1A000000</color>
+    <color name="black_alpha_30">#4D000000</color>
+    <color name="black_alpha_60">#99000000</color>
+    <color name="black_alpha_70">#B3000000</color>
+    <color name="black_alpha_90">#E6000000</color>
+    <color name="black_alpha_95">#F2000000</color>
+
+
+    <!-- https://en.wikipedia.org/wiki/Category:Shades_of_black -->
+    <color name="black">#000000</color>
+    <color name="smoky_black">#101014</color>
+
+    <!-- https://en.wikipedia.org/wiki/Category:Shades_of_gray -->
+    <color name="davys_gray">#555555</color>
+    <color name="silver">#75757B</color>
+    <color name="dim_gray">#222229</color>
+
+    <!--https://en.wikipedia.org/wiki/Shades_of_pink-->
+    <color name="bright_pink">#FF0058</color>
+    <color name="bright_pink_alpha_10">#1AFF0058</color>
+    <color name="bright_pink_alpha_20">#33FF0058</color>
+    <color name="bright_pink_alpha_30">#4DFF0058</color>
+    <color name="bright_pink_alpha_60">#99FF0058</color>
+    <color name="bright_pink_alpha_70">#B3FF0058</color>
+    <color name="barbie_pink">#DA1884</color>
+    <color name="piggy_pink">#f786a6</color>
+
+    <!-- https://graf1x.com/shades-of-yellow-color-palette-chart/ -->
+    <color name="gold">#FFB222</color>
+    <color name="pale_black">#1C1C1C</color>
+
+    <color name="spark_primary_color">#FFFFC107</color>
+    <color name="spark_secondary_color">#FFFF5722</color>
+    <color name="spark_image_tint">#00000000</color>
+
+    <color name="heart_primary_color">#da4439</color>
+    <color name="heart_secondary_color">#8a098c</color>
+    <color name="color_shimmer">#75757B</color>
+
+    <color name="dark_gray">#4E565A</color>
+    <color name="pricingBackground">#00FFFFFF</color>
+    <color name="darkCyanToolbar">#151c39</color>
+    <color name="darkCyan">#151c25</color>
+</resources>

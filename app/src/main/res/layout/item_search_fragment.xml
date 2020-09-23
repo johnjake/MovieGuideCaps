@@ -1,0 +1,48 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/pixels_16"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@color/darkCyan"
+    app:cardCornerRadius="@dimen/pixels_4"
+    app:cardElevation="@dimen/pixels_4">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/pixels_4">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/pixels_115"
+            android:layout_height="@dimen/pixels_90"
+
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_thor_movie"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="@dimen/pixels_4" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/imageView"
+            android:text="Title"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:textSize="11sp"
+            android:layout_toRightOf="@+id/imageView"
+            android:text="Description" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
