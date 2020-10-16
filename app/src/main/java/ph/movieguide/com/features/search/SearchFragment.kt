@@ -14,37 +14,48 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.LoadState
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputLayout
 import com.jakewharton.rxbinding3.widget.textChangeEvents
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.subjects.PublishSubject
+import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.layout_search.*
-import kotlinx.android.synthetic.main.layout_search.searchSuggestList as listView
 import kotlinx.android.synthetic.main.layout_search.searchResultList as listResultView
 import kotlinx.android.synthetic.main.toolbar_movie_details.*
-
-import org.koin.androidx.viewmodel.ext.android.viewModel
-
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import ph.movieguide.com.R
-
 import ph.movieguide.com.data.vo.MovieScreen
 import ph.movieguide.com.ext.hideKeyboard
 import ph.movieguide.com.features.main.MainActivity
-import ph.movieguide.com.features.search.result.ResultAdapter
+import ph.movieguide.com.features.search.result.MovieLoadStateAdapter
+import ph.movieguide.com.features.search.result.ResultViewModel
+import ph.movieguide.com.features.search.result.adapter.ResultPagingDataAdapter
 import ph.movieguide.com.features.search.suggest.SuggestAdapter
-import ph.movieguide.com.utils.State
 import java.util.concurrent.TimeUnit
 
 class SearchFragment : Fragment(),
     SuggestAdapter.OnItemClickListener,
-    ResultAdapter.OnItemResultClickListener {
+    PagingSearchAdapter.OnItemPagingSearchListener {
 
+    private lateinit var resultLayout: LinearLayoutManager
     private val disposables = CompositeDisposable()
     private val clearDrawable by lazy {
         val width = requireContext().resources.getDimensionPixelOffset(R.dimen.include_clear_menu_width)
@@ -62,13 +73,23 @@ class SearchFragment : Fragment(),
         }
         BitmapDrawable(requireContext().resources, bitmap)
     }
-
     private val cursorStream = PublishSubject.create<Boolean>()
     private lateinit var searchLayout: TextInputLayout
     private lateinit var search: EditText
-    private val viewModel: ViewModelSearch by viewModel()
-    private val suggestAdapter by lazy { SuggestAdapter(this) }
-    private val resultAdapter by lazy { ResultAdapter(this) }
+    private lateinit var loaderState: MovieLoadStateAdapter
+    private val resultAdapter by lazy { ResultPagingDataAdapter() }
+    private val resultViewModel: ResultViewModel by inject<ResultViewModel>()
+    private var searchJob: Job? = null
+
+    @ExperimentalPagingApi
+    private fun implementSearchMovies(query: String) {
+        searchJob?.cancel()
+        searchJob = lifecycleScope.launch {
+            resultViewModel.getResultFromSearch(query).distinctUntilChanged().collectLatest {
+                resultAdapter.submitData(it)
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,6 +97,7 @@ class SearchFragment : Fragment(),
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_search, container, false)
 
+    @ExperimentalPagingApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -87,20 +109,6 @@ class SearchFragment : Fragment(),
 
         val suggestLayout = LinearLayoutManager(requireContext()).apply {
             orientation = LinearLayoutManager.VERTICAL
-        }
-
-        val resultLayout = LinearLayoutManager(requireContext()).apply {
-            orientation = LinearLayoutManager.VERTICAL
-        }
-
-        listView.apply {
-            layoutManager = suggestLayout
-            adapter = suggestAdapter
-        }
-
-        listResultView.apply {
-            layoutManager = resultLayout
-            adapter = resultAdapter
         }
 
         searchLayout.apply {
@@ -116,9 +124,8 @@ class SearchFragment : Fragment(),
                 }
             }
         }
-
-        suggestionObserver()
-        searchObserver()
+        initPagingAdapter()
+        implementSearchMovies(DEFAULT_QUERY_MOVIE)
     }
 
     override fun onStart() {
@@ -127,10 +134,9 @@ class SearchFragment : Fragment(),
             MainActivity.onBackPress = true
             this.findNavController().popBackStack()
         }
-
-        viewModel.getSearchSuggestionFromDB()
     }
 
+    @ExperimentalPagingApi
     override fun onResume() {
         super.onResume()
         observeCursor()
@@ -147,6 +153,45 @@ class SearchFragment : Fragment(),
         disposables.clear()
     }
 
+    private fun initPagingAdapter() {
+
+        loaderState = MovieLoadStateAdapter { resultAdapter.retry() }
+
+        resultLayout = LinearLayoutManager(requireContext()).apply {
+            orientation = LinearLayoutManager.VERTICAL
+        }
+
+        val decoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+
+        listResultView.apply {
+            layoutManager = resultLayout
+            adapter = resultAdapter.withLoadStateFooter(loaderState)
+            addItemDecoration(decoration)
+        }
+
+        resultAdapter.addLoadStateListener { loadState ->
+            resultProgress.isVisible = loadState.source.refresh is LoadState.Loading
+
+            // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
+            val errorState = loadState.source.append as? LoadState.Error
+                ?: loadState.source.prepend as? LoadState.Error
+                ?: loadState.append as? LoadState.Error
+                ?: loadState.prepend as? LoadState.Error
+            errorState?.let {
+                Toast.makeText(
+                    context,
+                    "\uD83D\uDE28 Whoops ${it.error}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+        }
+
+        setupRecycleViewScrollListener()
+    }
+
+
+    @ExperimentalPagingApi
     @SuppressLint("DefaultLocale", "LogNotTimber")
     private fun observeSearchView() {
         // https://blog.mindorks.com/implement-search-using-rxjava-operators-c8882b64fe1d
@@ -155,25 +200,31 @@ class SearchFragment : Fragment(),
                 cursorStream.onNext(event.view.isFocused) }
             .doOnNext { event ->
                 if (event.count == 0) {
-                    suggestionsGrp.visibility = View.VISIBLE
-                    resultsGrp.visibility = View.GONE
                     searchLayout.setEndIconDrawable(R.drawable.ic_search_close)
                 } else {
-                    suggestionsGrp.visibility = View.GONE
                     resultsGrp.visibility = View.VISIBLE
                     searchLayout.endIconDrawable = clearDrawable
                 }
             }
             .map { event -> event.text }
             .map { text -> text.toString().toLowerCase().trim() }
-            .debounce(350, TimeUnit.MILLISECONDS)
+            .debounce(250, TimeUnit.MILLISECONDS)
             .filter { text -> text.isNotBlank() }
             .distinctUntilChanged()
             .subscribe {
-                query -> viewModel.getSearchResult(query)
-                /**  view model for search **/
+
+              implementSearchMovies(it)
             }
             .addTo(disposables)
+
+        lifecycleScope.launch {
+            resultAdapter.loadStateFlow
+                .distinctUntilChangedBy { it.refresh }
+                .filter { it.refresh is LoadState.Loading }
+                .collect {
+                    listResultView.scrollToPosition(0)
+                }
+        }
     }
 
     private fun observeCursor() {
@@ -194,48 +245,6 @@ class SearchFragment : Fragment(),
         }
     }
 
-
-    private fun suggestionObserver() {
-        viewModel.stateLiveData.observe(viewLifecycleOwner, Observer { state -> handleScreenDBObserverState(state) })
-    }
-
-    private fun searchObserver() {
-        viewModel.stateSearch.observe(viewLifecycleOwner, Observer { state -> handleSearchObserverState(state) })
-    }
-
-    /** observer state database **/
-    private fun handleSearchObserverState(state: State<List<MovieScreen>>) {
-        when (state) {
-            is State.Data -> handleSearchSuccess(state.data)
-            is State.Error -> handleSearchFailed(state.error)
-        }
-    }
-
-    private fun handleSearchFailed(error: Throwable) {
-        Toast.makeText(context, "Error On: ${error.message}", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun handleSearchSuccess(data: List<MovieScreen>) {
-        resultAdapter.dataSource = data
-        viewModel.saveDiscoverList(data)
-    }
-
-    /** observer state database **/
-    private fun handleScreenDBObserverState(state: State<List<MovieScreen>>) {
-        when (state) {
-            is State.Data -> handleScreenDBSuccess(state.data)
-            is State.Error -> handleScreenDBFailed(state.error)
-        }
-    }
-
-    private fun handleScreenDBFailed(error: Throwable) {
-        Toast.makeText(context, "Error On: ${error.message}", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun handleScreenDBSuccess(data: List<MovieScreen>) {
-        suggestAdapter.dataSource = data
-    }
-
     override fun onItemClick(movie: MovieScreen, position: Int) {
         MainActivity.onTopDetails = false
         MainActivity.onNowShowingDetails = true
@@ -248,5 +257,21 @@ class SearchFragment : Fragment(),
         MainActivity.onNowShowingDetails = true
         val actionByParam = SearchFragmentDirections.actionSearchFragmentToDetailsFragment(movie.id)
         findNavController().navigate(actionByParam)
+
+    }
+
+    private fun setupRecycleViewScrollListener() {
+        listResultView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val totalItemCount = resultLayout.itemCount
+                val visibleItemCount = resultLayout.childCount
+                val lastVisibleItem = resultLayout.findLastVisibleItemPosition()
+            }
+        })
+    }
+
+    companion object {
+        const val DEFAULT_QUERY_MOVIE = "The Notebook"
     }
 }

@@ -1,9 +1,7 @@
 package ph.movieguide.com.features.cinema.paging
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -12,7 +10,6 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import org.koin.dsl.module
 import ph.movieguide.android_baseplate_persistence.AppDatabase
 import ph.movieguide.android_baseplate_persistence.model.DBMoviesNowPlaying
 import ph.movieguide.android_baseplate_persistence.model.DBRemoteKeys
@@ -22,24 +19,16 @@ import ph.movieguide.com.features.cinema.Repository.Companion.DEFAULT_PAGE_INDEX
 import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
-import java.io.InvalidObjectException
 import androidx.room.withTransaction
 import ph.movieguide.com.BuildConfig.API_KEY
 import ph.movieguide.com.BuildConfig.DEFAULT_LANGUAGE
-import ph.movieguide.com.di.providesApplicationContext
 import java.lang.Exception
-
-@ExperimentalPagingApi
-val mediatorModule = module {
-    factory { PagingMediator(apiServices = get(), appDatabase = get(), mapper = get(), context = get()) }
-}
 
 @ExperimentalPagingApi
 class PagingMediator(
     private val apiServices: ApiServices,
     private val appDatabase: AppDatabase,
-    private val mapper: NowPlayingMapper,
-    private val context: Context
+    private val mapper: NowPlayingMapper
 ) : RemoteMediator<Int, DBMoviesNowPlaying>() {
 
     /** for single request scope **/
@@ -108,15 +97,15 @@ class PagingMediator(
             }
             LoadType.APPEND -> {
                 try {
-                    val remoteKeys = getLastRemoteKey(state) ?: null
-                    remoteKeys?.nextKey
+                    val remoteKeys = getLastRemoteKey(state)
+                        remoteKeys?.nextKey
                 }catch (ex: Exception) {
                     Log.e("PREPEND", "message: ${ex.message}")
                 }
             }
             LoadType.PREPEND -> {
                 try {
-                    val remoteKeys = getFirstRemoteKey(state) ?: null
+                    val remoteKeys = getFirstRemoteKey(state)
                     //end of list condition reached
                     remoteKeys?.prevKey
                         ?: return MediatorResult.Success(endOfPaginationReached = true)

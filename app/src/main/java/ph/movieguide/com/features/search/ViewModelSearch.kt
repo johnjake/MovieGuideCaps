@@ -9,17 +9,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
 import ph.movieguide.com.data.mapper.NowPlayingMapper
-import ph.movieguide.com.data.mapper.TopRatedMapper
 import ph.movieguide.com.data.vo.MovieScreen
 import ph.movieguide.com.utils.State
 import timber.log.Timber
 
-val viewModelSearch = module {
-    viewModel { ViewModelSearch(integrator = get(), mapper = get()) }
-}
 class ViewModelSearch(
     private val integrator: Repository,
     private val mapper: NowPlayingMapper) : ViewModel() {

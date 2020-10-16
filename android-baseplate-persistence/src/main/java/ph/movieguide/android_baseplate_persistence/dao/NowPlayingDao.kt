@@ -13,6 +13,9 @@ abstract class NowPlayingDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertMovieScreen(topRated: DBMoviesNowPlaying)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract fun insertAllMovies(topRated: List<DBMoviesNowPlaying>)
+
     @Query("select * from movie_playing where idMovie = :movieId")
     abstract suspend fun getNowPlayingMovieById(movieId: Int): DBMoviesNowPlaying
 
@@ -30,4 +33,7 @@ abstract class NowPlayingDao {
 
     @Query("DELETE FROM movie_playing")
     abstract suspend fun clearAllNowPlayingMovie()
+
+    @Query("SELECT * FROM movie_playing WHERE title LIKE :queryString OR original_title LIKE :queryString GROUP BY title ORDER BY title DESC ")
+    abstract fun getSearchMoviePlaying(queryString: String): PagingSource<Int, DBMoviesNowPlaying>
 }

@@ -9,16 +9,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
 import ph.movieguide.com.data.mapper.VisitedMapper
 import ph.movieguide.com.data.vo.MovieScreen
 import ph.movieguide.com.utils.State
 import timber.log.Timber
 
-val viewModelVisited = module {
-    viewModel { ViewModelVisited(integrator = get(), mapper = get()) }
-}
 class ViewModelVisited(
     private val integrator: Repository,
     private val mapper: VisitedMapper

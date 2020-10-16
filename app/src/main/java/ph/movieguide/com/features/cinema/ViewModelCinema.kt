@@ -4,10 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.DataSource
 import androidx.paging.ExperimentalPagingApi
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -17,21 +14,13 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.dsl.viewModel
-
-import org.koin.dsl.module
 import ph.movieguide.android_baseplate_persistence.AppDatabase
 import ph.movieguide.android_baseplate_persistence.model.DBMoviesNowPlaying
 import ph.movieguide.com.data.mapper.TopRatedMapper
 import ph.movieguide.com.data.vo.MovieScreen
-import ph.movieguide.com.features.cinema.paging.PageDataSource
-import ph.movieguide.com.features.splash.ViewModelSplash
 import ph.movieguide.com.utils.State
 import timber.log.Timber
 
-val viewModelCinema =  module {
-    viewModel { ViewModelCinema(integrator = get(), appDatabase = get(), mapper = get()) }
-}
 class ViewModelCinema (
     private val integrator: Repository,
     private val appDatabase: AppDatabase,

@@ -5,22 +5,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
-import org.koin.dsl.module
 import ph.movieguide.android_baseplate_persistence.AppDatabase
-import ph.movieguide.com.data.mapper.DiscoverMapper
 import ph.movieguide.com.data.mapper.NowPlayingMapper
 import ph.movieguide.com.data.mapper.TopRatedMapper
 import ph.movieguide.com.data.mapper.VisitedMapper
 import ph.movieguide.com.data.vo.MovieScreen
 import timber.log.Timber
 
-val detailsRepoModuleInfo = module {
-    factory { Repository(appDatabase = get(),
-        mapper = get(),
-        mapperTop = get(),
-        mapperVisited = get()
-    ) }
-}
 class Repository(
     private val appDatabase: AppDatabase,
     private val mapper: NowPlayingMapper,

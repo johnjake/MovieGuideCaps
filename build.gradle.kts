@@ -13,7 +13,7 @@ buildscript {
         maven(url = "https://plugins.gradle.org/m2/")
     }
     dependencies {
-        classpath ("com.android.tools.build:gradle:4.0.1")
+        classpath ("com.android.tools.build:gradle:4.0.2")
         classpath ("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.0")
         classpath ("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0")
         classpath("org.gradle.kotlin:gradle-kotlin-dsl-conventions:0.5.0")

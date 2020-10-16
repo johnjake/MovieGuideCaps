@@ -34,4 +34,7 @@
     <string name="in_theater">In Theater:</string>
     <string name="default_dateTime">2020-19-10</string>
     <string name="clear">Clear</string>
+    <string name="error_message">Error message</string>
+    <string name="retry">Retry</string>
+    <string name="label_error">Something went wrong, please try again</string>
 </resources>

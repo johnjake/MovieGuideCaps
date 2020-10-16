@@ -20,7 +20,8 @@ class PageDataSource(private val api: ApiServices) :
         return try {
             val response = api.getNowPlayingMovies(apiKey, DEFAULT_LANGUAGE, page)
             LoadResult.Page(
-                response.results, prevKey = if (page == DEFAULT_PAGE_INDEX) null else page - 1,
+                response.results,
+                prevKey = if (page == DEFAULT_PAGE_INDEX) null else page - 1,
                 nextKey = if (response.results.isEmpty()) null else page + 1
             )
         } catch (exception: IOException) {

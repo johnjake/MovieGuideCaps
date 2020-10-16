@@ -10,17 +10,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
 import ph.movieguide.com.data.mapper.MovieMapper
 import ph.movieguide.com.data.vo.MovieScreen
 import ph.movieguide.com.utils.State
 import ph.movieguide.com.utils.schedulers.BaseSchedulerProvider
 import timber.log.Timber
 
-val viewModelSplash = module {
-    viewModel { ViewModelSplash(integrator = get(),schedulers = get(), mapper = get()) }
-}
 class ViewModelSplash(
     private val integrator: Repository,
     private val schedulers: BaseSchedulerProvider,

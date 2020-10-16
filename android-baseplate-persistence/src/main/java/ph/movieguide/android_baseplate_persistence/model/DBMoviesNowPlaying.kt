@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = DBMoviesNowPlaying.TABLE_NAME_MOVIE)
 data class DBMoviesNowPlaying(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    val id: Int,
     val popularity: Double = 0.0,
     val vote_count: Int = 0,
     val video: Boolean = false,

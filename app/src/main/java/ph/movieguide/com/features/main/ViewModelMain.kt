@@ -12,17 +12,12 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
 import ph.movieguide.com.data.mapper.MovieMapper
 import ph.movieguide.com.data.vo.MovieDetails
 import ph.movieguide.com.data.vo.MovieScreen
 import timber.log.Timber
 import ph.movieguide.com.utils.State as StateLiveData
 
-val viewModelMain = module {
-    viewModel { ViewModelMain(integrator = get(), mapper = get()) }
-}
 class ViewModelMain(
     private val integrator: MovieDetailsImpl,
     private val mapper: MovieMapper

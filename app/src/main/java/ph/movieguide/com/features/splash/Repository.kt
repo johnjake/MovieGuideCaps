@@ -5,17 +5,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
-import org.koin.dsl.module
 import ph.movieguide.android_baseplate_persistence.AppDatabase
 import ph.movieguide.com.BuildConfig
 import ph.movieguide.com.api.ApiServices
 import ph.movieguide.com.data.mapper.TopRatedMapper
 import ph.movieguide.com.data.vo.MovieScreen
 import timber.log.Timber
-
-val splashRepoModule = module {
-    factory { Repository(api = get(), appDatabase = get(),mapper = get()) }
-}
 
 open class Repository (
     private val api: ApiServices,

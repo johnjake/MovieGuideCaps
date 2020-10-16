@@ -7,7 +7,6 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.koin.dsl.module
 import ph.movieguide.android_baseplate_persistence.AppDatabase
 import ph.movieguide.android_baseplate_persistence.model.DBMoviesNowPlaying
 import ph.movieguide.com.BuildConfig
@@ -16,9 +15,6 @@ import ph.movieguide.com.data.mapper.NowPlayingMapper
 import ph.movieguide.com.data.vo.MovieScreen
 import timber.log.Timber
 
-val searchRepoModule = module {
-    factory { Repository(apiServices = get(), app = get(), mapper = get()) }
-}
 class Repository(
     private val apiServices: ApiServices,
     private val app: AppDatabase,

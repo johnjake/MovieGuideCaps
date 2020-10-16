@@ -49,4 +49,11 @@ interface ApiServices {
         @Query("language") languages: String = "en-US",
         @Query("page") pageNumber: Int
     ): MovieMetaData
+
+    @GET("search/movie")
+    suspend fun getSearchMovieView(
+        @Query("api_key") apiKey: String,
+        @Query("query") searchKey: String,
+        @Query("page") pageNumber: Int
+    ): MovieMetaData
 }

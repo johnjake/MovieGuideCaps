@@ -2,14 +2,11 @@ package ph.movieguide.com.features.main
 
 import io.reactivex.Single
 import kotlinx.coroutines.flow.Flow
-import org.koin.dsl.module
 import ph.movieguide.android_baseplate_persistence.model.DBMovieScreen
 import ph.movieguide.com.data.vo.MovieDetails
 import ph.movieguide.com.data.vo.MovieScreen
 import ph.movieguide.com.interactors.MovieDetailsInteractor
-val mainDataSourceModule = module {
-    factory { MovieDetailsImpl(repository = get()) }
-}
+
 class MovieDetailsImpl (
     private val repository: Repository
 ) : MovieDetailsInteractor {

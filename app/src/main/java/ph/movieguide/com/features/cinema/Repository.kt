@@ -12,8 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
-import org.koin.dsl.koinApplication
-import org.koin.dsl.module
 import ph.movieguide.android_baseplate_persistence.AppDatabase
 import ph.movieguide.android_baseplate_persistence.model.DBMoviesNowPlaying
 import ph.movieguide.android_baseplate_persistence.model.DBMoviesTopRated
@@ -24,10 +22,6 @@ import ph.movieguide.com.data.vo.MovieScreen
 import ph.movieguide.com.features.cinema.paging.PageDataSource
 import ph.movieguide.com.features.cinema.paging.PagingMediator
 import timber.log.Timber
-
-val cinemaRepoModule = module {
-    factory { Repository(api= get(), appDatabase = get(), mapper = get(), application = get()) }
-}
 
 class Repository (
     private val api: ApiServices,
@@ -92,7 +86,7 @@ class Repository (
         val data = Pager(
             config = pagingConfig,
             pagingSourceFactory = pagingSourceFactory,
-            remoteMediator = PagingMediator(api, appDatabase, mapper, application.applicationContext)
+            remoteMediator = PagingMediator(api, appDatabase, mapper)
         ).flow
         return data
     }

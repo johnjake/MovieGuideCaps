@@ -5,14 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
 import ph.movieguide.com.data.vo.MovieScreen
 import ph.movieguide.com.utils.State
 
-val viewModelDataDetails = module {
-    viewModel { ViewModelDetails(integrator = get()) }
-}
 class ViewModelDetails(
     private val integrator: Repository
 ) : ViewModel() {

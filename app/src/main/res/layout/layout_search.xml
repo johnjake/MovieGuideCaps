@@ -40,7 +40,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/searchInputLayout"
         android:layout_width="0dp"
-        android:layout_height="54dp"
+        android:layout_height="58dp"
         android:layout_marginTop="2dp"
         android:elevation="16dp"
         app:endIconMode="custom"
@@ -65,6 +65,7 @@
             android:textColor="@color/colorWhite"
             android:textCursorDrawable="@drawable/default_cursor"
             android:textSize="15sp" />
+        <requestFocus />
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
@@ -77,34 +78,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarBackground"
-        tools:visibility="gone">
+        >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/searchResultList"
-            android:layout_marginStart="@dimen/pixels_16"
-            android:layout_marginEnd="@dimen/pixels_16"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/pixels_8"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_search_view"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/suggestionsGrp"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarBackground"
-        tools:visibility="visible">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/searchSuggestList"
             android:layout_marginStart="@dimen/pixels_16"
             android:layout_marginEnd="@dimen/pixels_16"
             android:layout_width="match_parent"

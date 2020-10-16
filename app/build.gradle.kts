@@ -87,7 +87,7 @@ dependencies {
     val archCompVersion = "2.3.0-alpha02"
     val lottieVersion = "3.4.2"
     val coilVersion = "0.13.0"
-    val pagingVersion  = "3.0.0-alpha06"
+    val pagingVersion  = "3.0.0-alpha07"
     val constrainLayoutVersion = "2.0.1"
     val roundImageVersion = "2.3.0"
     val navFragmentKtxVersion  = "2.3.0"
