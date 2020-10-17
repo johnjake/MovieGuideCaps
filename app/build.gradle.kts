@@ -106,9 +106,9 @@ dependencies {
     implementation("androidx.annotation:annotation:1.1.0")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.10")
-    implementation("androidx.core:core-ktx:1.3.1")
+    implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.2")
 
     //Dagger
     api("com.google.dagger:dagger-android:$daggerVersion")
@@ -193,7 +193,7 @@ dependencies {
     //paging
     implementation ("androidx.paging:paging-runtime:$pagingVersion") // For Kotlin use paging-runtime-ktx
 
-    testImplementation("junit:junit:4.13")
+    testImplementation("junit:junit:4.13.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 }

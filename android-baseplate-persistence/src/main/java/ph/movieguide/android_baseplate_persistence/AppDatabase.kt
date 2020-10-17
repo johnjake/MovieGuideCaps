@@ -34,7 +34,7 @@ import ph.movieguide.android_baseplate_persistence.model.Devices
         DBMovieDiscover::class,
         Devices::class
     ],
-    version = 35,
+    version = 36,
     exportSchema = false
 )
 @TypeConverters

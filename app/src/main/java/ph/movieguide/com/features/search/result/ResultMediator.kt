@@ -1,4 +1,4 @@
-package ph.movieguide.com.features.search.result.repository
+package ph.movieguide.com.features.search.result
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
@@ -12,8 +12,6 @@ import ph.movieguide.android_baseplate_persistence.model.DBRemoteKeys
 import ph.movieguide.com.BuildConfig
 import ph.movieguide.com.api.ApiServices
 import ph.movieguide.com.data.mapper.DiscoverMapper
-
-import ph.movieguide.com.features.search.result.repository.ResultRepository.Companion.DEFAULT_PAGE_INDEX
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -125,5 +123,9 @@ class ResultMediator(private val query: String,
                 database.remoteKeysDao().remoteKeysMovieId(id)
             }
         }
+    }
+
+    companion object {
+        const val DEFAULT_PAGE_INDEX = 1
     }
 }

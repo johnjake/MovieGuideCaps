@@ -6,8 +6,8 @@ import ph.movieguide.com.features.cinema.ViewModelCinema
 import ph.movieguide.com.features.details.ViewModelDetails
 import ph.movieguide.com.features.discover.ViewModelDiscover
 import ph.movieguide.com.features.main.ViewModelMain
+import ph.movieguide.com.features.search.SearchPagingViewModel
 import ph.movieguide.com.features.search.ViewModelSearch
-import ph.movieguide.com.features.search.result.ResultViewModel
 import ph.movieguide.com.features.splash.ViewModelSplash
 import ph.movieguide.com.features.visited.ViewModelVisited
 
@@ -19,5 +19,5 @@ val viewModelModule = module {
     viewModel { ViewModelVisited(integrator = get(), mapper = get()) }
     viewModel { ViewModelDiscover(integrator = get(), mapper = get()) }
     viewModel { ViewModelDetails(integrator = get()) }
-    viewModel { ResultViewModel(integrator = get()) }
+    viewModel { SearchPagingViewModel(integrator = get()) }
 }

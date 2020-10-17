@@ -33,4 +33,7 @@ abstract class DiscoverDao {
 
     @Query("DELETE FROM movie_discover")
     abstract suspend fun clearAllDiscoverMovie()
+
+    @Query("SELECT * FROM movie_discover WHERE title LIKE :queryString OR original_title LIKE :queryString GROUP BY title ORDER BY title DESC ")
+    abstract fun getSearchMoviePlaying(queryString: String): PagingSource<Int, DBMovieDiscover>
 }
