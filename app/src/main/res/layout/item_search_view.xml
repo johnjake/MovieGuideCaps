@@ -11,7 +11,7 @@
 
     <ImageView
         android:id="@+id/imgSearch"
-        android:layout_width="@dimen/pixels_125"
+        android:layout_width="@dimen/pixels_90"
         android:layout_height="@dimen/pixels_90"
         android:layout_marginStart="@dimen/pixels_2"
         android:layout_marginTop="@dimen/pixels_2"
@@ -25,13 +25,16 @@
 
     <TextView
         android:id="@+id/txtSearchTitle"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/pixels_100"
+        android:layout_marginEnd="@dimen/pixels_4"
         android:layout_marginTop="8dp"
         android:includeFontPadding="false"
+        android:maxLines="4"
         android:textColor="@color/pinkOne"
-        android:textSize="16sp"
+        android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imgSearch"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
@@ -44,10 +47,11 @@
         android:textColor="@color/white_alpha_30"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintHorizontal_bias="0.783"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.871"
         tools:text="\@taylor" />
 
     <RatingBar
@@ -58,25 +62,27 @@
         android:progressTint="#ffba49"
         android:rating="5"
         android:stepSize="0.5"
+        android:layout_marginTop="@dimen/pixels_16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.078"
         app:layout_constraintStart_toEndOf="@+id/imgSearch"
         app:layout_constraintTop_toBottomOf="@+id/txtSearchTitle"
-        app:layout_constraintVertical_bias="0.735" />
+        app:layout_constraintVertical_bias="0.732" />
 
     <TextView
         android:id="@+id/txtSearchRelease"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/pixels_16"
         android:textColor="@color/gold"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.664"
+        app:layout_constraintHorizontal_bias="0.608"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.82"
+        app:layout_constraintVertical_bias="0.838"
         tools:text="\@taylor" />
 
     <View
