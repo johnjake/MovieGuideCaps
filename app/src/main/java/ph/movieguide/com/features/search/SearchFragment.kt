@@ -29,6 +29,7 @@ import com.jakewharton.rxbinding3.widget.textChangeEvents
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.subjects.PublishSubject
+import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.layout_search.*
 import kotlinx.android.synthetic.main.layout_search.searchResultList as listResultView
 import kotlinx.android.synthetic.main.toolbar_movie_details.*
@@ -67,7 +68,7 @@ class SearchFragment : Fragment() {
     private val cursorStream = PublishSubject.create<Boolean>()
     private lateinit var searchLayout: TextInputLayout
     private lateinit var search: EditText
-    private lateinit var loaderState: MovieLoadStateAdapter
+    private lateinit var loaderState: SearchLoaderStateAdapter
     private val searchAdapter: SearchPagingAdapter by lazy { SearchPagingAdapter() }
     private val viewModel: SearchPagingViewModel by inject<SearchPagingViewModel>()
     private var searchJob: Job? = null
@@ -144,9 +145,6 @@ class SearchFragment : Fragment() {
     }
 
     private fun initPagingAdapter() {
-
-
-
         resultLayout = LinearLayoutManager(requireContext()).apply {
             orientation = LinearLayoutManager.VERTICAL
         }
@@ -155,13 +153,15 @@ class SearchFragment : Fragment() {
 
         listResultView.apply {
             layoutManager = resultLayout
-           adapter = searchAdapter
+           adapter = searchAdapter.withLoadStateHeaderAndFooter(
+               header = SearchLoaderStateAdapter { searchAdapter.retry() },
+               footer = SearchLoaderStateAdapter { searchAdapter.retry() }
+           )
             addItemDecoration(decoration)
         }
 
-       /* resultAdapter.addLoadStateListener { loadState ->
+       searchAdapter.addLoadStateListener { loadState ->
             resultProgress.isVisible = loadState.source.refresh is LoadState.Loading
-
             // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
             val errorState = loadState.source.append as? LoadState.Error
                 ?: loadState.source.prepend as? LoadState.Error
@@ -174,9 +174,7 @@ class SearchFragment : Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
             }
-
-        } */
-
+        }
         setupRecycleViewScrollListener()
     }
 

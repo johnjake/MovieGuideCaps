@@ -4,7 +4,6 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import ph.movieguide.com.BuildConfig
 import ph.movieguide.com.data.vo.MovieScreen
 
 class SearchPagingAdapter() : PagingDataAdapter<MovieScreen, ViewHolder>(COMPARATOR) {

@@ -27,14 +27,20 @@ class SearchPagingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         movieId.text = movie.id.toString()
         textRelease.text = "(${movie.vote_average})"
         textView.text = movie.title
-        imgView.load(baseUrl+movie.backdrop_path)
+        if (!movie.backdrop_path.isNullOrEmpty()) {
+            imgView.load(baseUrl+movie.backdrop_path)
+        } else {
+            imgView.scaleType = ImageView.ScaleType.CENTER_CROP
+            imgView.load(R.drawable.ic_movie_empty)
+        }
+
     }
 
     companion object {
         fun create(parent: ViewGroup): SearchPagingViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_search_view, parent, false)
-            return SearchPagingViewHolder(view)
+            return SearchPagingViewHolder(view = view)
         }
     }
 

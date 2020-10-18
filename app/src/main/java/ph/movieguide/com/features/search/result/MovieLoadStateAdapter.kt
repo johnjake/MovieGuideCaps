@@ -37,7 +37,7 @@ class MovieLoadStateAdapter(private val retry: () -> Unit) :
             }
         }
 
-        private val motionLayout: MotionLayout = view.findViewById(R.id.mlLoader)
+        private val motionLayout: MotionLayout = view.findViewById(R.id.mainLoader)
 
         init {
             view.findViewById<Button>(R.id.btnRetry).setOnClickListener {
