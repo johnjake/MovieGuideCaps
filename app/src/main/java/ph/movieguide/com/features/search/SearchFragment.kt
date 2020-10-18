@@ -241,6 +241,6 @@ class SearchFragment : Fragment() {
     }
 
     companion object {
-        const val DEFAULT_QUERY_MOVIE = "The Notebook"
+        const val DEFAULT_QUERY_MOVIE = "Robot"
     }
 }

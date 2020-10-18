@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.DrawableRes
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.makeramen.roundedimageview.RoundedImageView
@@ -16,7 +18,7 @@ import ph.movieguide.com.data.vo.MovieScreen
 import timber.log.Timber
 
 
-class NowShowingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class NowShowingViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     private val movieId: TextView = view.findViewById(R.id.textViewId)
     private val movieTitle:TextView = view.findViewById(R.id.txtMovieTitle)
     private val movieRelease: TextView = view.findViewById(R.id.txtTitle)
@@ -51,7 +53,12 @@ class NowShowingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         movieRelease.text = "Showing On: $dateRelease"
         movieId.text = movieScreen.id.toString()
         movieTitle.text = movieScreen.title
+        setImageStrokeDrawable(R.drawable.stroke_gray_avatar)
         imgPoster.load(baseUrl+ movieScreen.poster_path)
+    }
+
+    private fun setImageStrokeDrawable(@DrawableRes id: Int) {
+        imgPoster.background = ResourcesCompat.getDrawable(view.resources, id, null)
     }
 
     companion object {

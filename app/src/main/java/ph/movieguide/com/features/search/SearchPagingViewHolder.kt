@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.annotation.DrawableRes
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import ph.movieguide.com.R
 import ph.movieguide.com.data.vo.MovieScreen
 
-class SearchPagingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class SearchPagingViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     private val baseUrl: String = ph.movieguide.com.BuildConfig.BASE_URL_POSTER
     private var textView: TextView = view.findViewById(R.id.txtSearchTitle)
     private var textRelease: TextView = view.findViewById(R.id.txtSearchRelease)
@@ -28,12 +30,19 @@ class SearchPagingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         textRelease.text = "(${movie.vote_average})"
         textView.text = movie.title
         if (!movie.backdrop_path.isNullOrEmpty()) {
+            imgView.setPadding(5,5,5,5,)
+            setImageStrokeDrawable(R.drawable.stroke_bright_pink_avatar)
             imgView.load(baseUrl+movie.backdrop_path)
         } else {
+            setImageStrokeDrawable(R.drawable.stroke_gray_avatar)
             imgView.scaleType = ImageView.ScaleType.CENTER_CROP
             imgView.load(R.drawable.ic_movie_empty)
+            imgView.setPadding(5,5,5,5,)
         }
 
+    }
+    private fun setImageStrokeDrawable(@DrawableRes id: Int) {
+        imgView.background = ResourcesCompat.getDrawable(view.resources, id, null)
     }
 
     companion object {
