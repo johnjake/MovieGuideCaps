@@ -42,7 +42,6 @@ import org.koin.android.ext.android.inject
 import ph.movieguide.com.R
 import ph.movieguide.com.ext.hideKeyboard
 import ph.movieguide.com.features.main.MainActivity
-import ph.movieguide.com.features.search.result.MovieLoadStateAdapter
 import java.util.concurrent.TimeUnit
 
 class SearchFragment : Fragment() {
