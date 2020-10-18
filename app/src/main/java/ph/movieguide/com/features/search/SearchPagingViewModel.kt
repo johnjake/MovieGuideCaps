@@ -21,8 +21,10 @@ class SearchPagingViewModel(
             return lastFlowResult
         }
         currentQuery = query
-
-        val newFlowResult: Flow<PagingData<MovieScreen>> = integrator.getSearchResultStream(query).cachedIn(viewModelScope)
+        val newFlowResult: Flow<PagingData<MovieScreen>> =
+            integrator
+                .getSearchResultStream(query)
+                .cachedIn(viewModelScope)
         currentFlowResult = newFlowResult
         return newFlowResult
     }
