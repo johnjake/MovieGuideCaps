@@ -62,8 +62,6 @@ android {
 
 dependencies {
 
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.recyclerview:recyclerview:1.1.0")
     val daggerVersion = "2.29.1"
     val coroutineCore = "1.3.7"
     val coroutineAndroid = "1.3.6"
@@ -71,7 +69,7 @@ dependencies {
     val cardViewVersion = "1.0.0"
     val archVersion = "2.1.0"
     val retrofitVersion = "2.9.0"
-    val supportMaterialDesignVersion = "1.3.0-alpha02"
+    val supportMaterialDesignVersion = "1.3.0-alpha03"
     val converterScalars = "2.9.0"
     val okhttpVersion = "4.9.0"
     val okhttpLoggingVersion = "4.9.0"
@@ -81,17 +79,19 @@ dependencies {
     val rxBindingXVersion = "3.1.0"
     val rxMathVersion = "0.20.10"
     val timberVersion = "4.7.1"
-    val ktxCore = "1.3.1"
+    val ktxCore = "1.3.2"
     val fragmentKtx = "1.2.5"
     val sharedPreferencesVersion  = "1.1.1"
-    val archCompVersion = "2.3.0-alpha02"
-    val lottieVersion = "3.4.2"
+    val archCompVersion = "2.3.0-alpha03"
+    val lottieVersion = "3.4.4"
     val coilVersion = "0.13.0"
     val pagingVersion  = "3.0.0-alpha07"
-    val constrainLayoutVersion = "2.0.1"
+    val constrainLayoutVersion = "2.0.2"
     val roundImageVersion = "2.3.0"
-    val navFragmentKtxVersion  = "2.3.0"
-    val navUiKtxVersion = "2.3.0"
+    val navFragmentKtxVersion  = "2.3.1"
+    val navUiKtxVersion = "2.3.1"
+    val androidAnnotation = "28.0.0"
+    val androidxAnnotation = "1.1.0"
 
     implementation(
         fileTree(
@@ -102,13 +102,17 @@ dependencies {
         )
     )
 
-    implementation("com.android.support:support-annotations:28.0.0")
-    implementation("androidx.annotation:annotation:1.1.0")
+    implementation(project(mapOf("path" to ":android-baseplate-persistence")))
+
+    implementation("com.android.support:support-annotations:$androidAnnotation")
+    implementation("androidx.annotation:annotation:$androidxAnnotation")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.10")
     implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.2")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.1.0")
 
     //Dagger
     api("com.google.dagger:dagger-android:$daggerVersion")
@@ -166,7 +170,7 @@ dependencies {
     //fragment-KTX
     implementation ("androidx.core:core-ktx:$ktxCore")
     implementation ("androidx.fragment:fragment-ktx:$fragmentKtx")
-    implementation(project(mapOf("path" to ":android-baseplate-persistence")))
+
     implementation("androidx.navigation:navigation-fragment-ktx:$navFragmentKtxVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navUiKtxVersion")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
