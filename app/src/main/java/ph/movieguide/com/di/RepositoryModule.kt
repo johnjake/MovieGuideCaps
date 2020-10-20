@@ -12,5 +12,5 @@ val repositoryModule = module {
     factory { ph.movieguide.com.features.discover.Repository(appDatabase = get()) }
     factory { ph.movieguide.com.features.search.Repository(apiServices = get(), app = get(), mapper = get()) }
     factory { ph.movieguide.com.features.cinema.Repository(api = get(), appDatabase = get(), mapper = get(), application = get()) }
-    factory { SearchPagingRepository(api = get()) }
+    factory { SearchPagingRepository(apiServices = get(), appDatabase = get(), mapper = get()) }
 }

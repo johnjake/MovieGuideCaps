@@ -20,6 +20,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
+import androidx.paging.flatMap
+import androidx.paging.map
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,12 +36,15 @@ import kotlinx.android.synthetic.main.layout_search.*
 import kotlinx.android.synthetic.main.layout_search.searchResultList as listResultView
 import kotlinx.android.synthetic.main.toolbar_movie_details.*
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.koin.android.ext.android.inject
 import ph.movieguide.com.R
+import ph.movieguide.com.data.mapper.DiscoverMapper
 import ph.movieguide.com.ext.hideKeyboard
 import ph.movieguide.com.features.main.MainActivity
 import java.util.concurrent.TimeUnit
@@ -67,11 +72,11 @@ class SearchFragment : Fragment() {
     private val cursorStream = PublishSubject.create<Boolean>()
     private lateinit var searchLayout: TextInputLayout
     private lateinit var search: EditText
-    private lateinit var loaderState: SearchLoaderStateAdapter
     private val searchAdapter: SearchPagingAdapter by lazy { SearchPagingAdapter() }
     private val viewModel: SearchPagingViewModel by inject<SearchPagingViewModel>()
     private var searchJob: Job? = null
 
+    @ExperimentalPagingApi
     private fun implementSearchMovies(query: String) {
        searchJob?.cancel()
         searchJob = lifecycleScope.launch {
@@ -207,7 +212,9 @@ class SearchFragment : Fragment() {
             searchAdapter.loadStateFlow
                 .distinctUntilChangedBy { it.refresh }
                 .filter { it.refresh is LoadState.Loading }
-                .collectLatest { listResultView.scrollToPosition(0) }
+                .collect {
+                    listResultView.scrollToPosition(0)
+                }
             }
     }
 

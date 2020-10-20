@@ -11,8 +11,8 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import ph.movieguide.android_baseplate_persistence.model.DBMovieDiscover
 import ph.movieguide.com.R
-import ph.movieguide.com.data.vo.MovieScreen
 
 class SearchPagingViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     private val baseUrl: String = ph.movieguide.com.BuildConfig.BASE_URL_POSTER
@@ -23,7 +23,9 @@ class SearchPagingViewHolder(private val view: View) : RecyclerView.ViewHolder(v
     private var ratingBarSearch: RatingBar = view.findViewById(R.id.ratingBarSearch)
 
     @SuppressLint("SetTextI18n")
-    fun bind(movie: MovieScreen) {
+    fun bind(movie: DBMovieDiscover) {
+        val mov = movie
+        val blocker = 0
         val rating = movie.vote_average/2
         ratingBarSearch.rating = rating.toFloat()
         movieId.text = movie.id.toString()

@@ -1,7 +1,6 @@
 package ph.movieguide.com.features.cinema
 
 import android.app.Application
-import android.content.Context
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -80,15 +79,12 @@ class Repository (
 
     @ExperimentalPagingApi
     fun letMovieScreenFlowDb(pagingConfig: PagingConfig = getDefaultPageConfig()): Flow<PagingData<DBMoviesNowPlaying>> {
-        if (appDatabase == null) throw IllegalStateException("Database is not initialized")
-
         val pagingSourceFactory = { appDatabase.nowPlayingMovieDao().getNowShowingMoviePaging() }
-        val data = Pager(
+        return Pager(
             config = pagingConfig,
             pagingSourceFactory = pagingSourceFactory,
             remoteMediator = PagingMediator(api, appDatabase, mapper)
         ).flow
-        return data
     }
 
 }

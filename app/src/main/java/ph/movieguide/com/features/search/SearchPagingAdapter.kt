@@ -4,9 +4,9 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import ph.movieguide.com.data.vo.MovieScreen
+import ph.movieguide.android_baseplate_persistence.model.DBMovieDiscover
 
-class SearchPagingAdapter() : PagingDataAdapter<MovieScreen, ViewHolder>(COMPARATOR) {
+class SearchPagingAdapter() : PagingDataAdapter<DBMovieDiscover, ViewHolder>(COMPARATOR) {
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -21,11 +21,11 @@ class SearchPagingAdapter() : PagingDataAdapter<MovieScreen, ViewHolder>(COMPARA
     }
 
     companion object {
-        private val COMPARATOR = object : DiffUtil.ItemCallback<MovieScreen>() {
-            override fun areItemsTheSame(oldItem: MovieScreen, newItem: MovieScreen): Boolean =
+        private val COMPARATOR = object : DiffUtil.ItemCallback<DBMovieDiscover>() {
+            override fun areItemsTheSame(oldItem: DBMovieDiscover, newItem: DBMovieDiscover): Boolean =
                 oldItem.title == newItem.title
 
-            override fun areContentsTheSame(oldItem: MovieScreen, newItem: MovieScreen): Boolean =
+            override fun areContentsTheSame(oldItem: DBMovieDiscover, newItem: DBMovieDiscover): Boolean =
                 oldItem == newItem
         }
     }
