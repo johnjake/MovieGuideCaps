@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.7">
       <module name="buildSrcs" target="1.7" />
+      <module name="MovieGuide.android-baseplate-domain" target="1.8" />
+      <module name="MovieGuide.android-baseplate-persistence" target="1.8" />
+      <module name="MovieGuide.app" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
