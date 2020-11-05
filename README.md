@@ -1,2 +1,5 @@
 # MovieGuide
-MovieGuide Init
+MovieGuide App 
+
+   api: https://developers.themoviedb.org/3
+
